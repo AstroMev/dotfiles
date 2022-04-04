@@ -24,6 +24,12 @@ backup_dotfiles() {
   done
 }
 
+install_apps() {
+  # install vim-plug
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+}
+
 link_to_homedir() {
   for df in $(command ls -A ./files/); do
     command echo "create symlink for $df"
