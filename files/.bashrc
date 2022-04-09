@@ -113,3 +113,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# my aliases
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
