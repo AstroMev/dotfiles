@@ -1,8 +1,26 @@
 #!/usr/bin/env bash
 
-sudo apt install make
+IsExistCmd() { type "$1" > /dev/null 2>&1; }
 
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-sudo apt update
-sudo apt install gh
+InstallDockerCmd() {
+  sudo apt-get install ca-certificates curl gnupg lsb-release
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt-get update
+  sudo apt-get install docker-ce docker-ce-cli containerd.io
+}
+
+InstallGhCmd() {
+  curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+  sudo apt-get update
+  sudo apt-get install gh
+}
+
+# Main
+sudo apt-get update
+! IsExistCmd make && sudo apt install make
+! IsExistCmd docker && InstallDockerCmd
+! IsExistCmd gh && InstallGhCmd
