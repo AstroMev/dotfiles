@@ -55,18 +55,22 @@ let lsp_signature_help_enabled = 0
 let g:goimports_simplify = 1
 
 if has("autocmd")
-  "ファイルタイプの検索を有効にする
-  filetype plugin on
-  "ファイルタイプに合わせたインデントを利用
-  filetype indent on
-  "sw=shiftwidth, sts=softtabstop, ts=tabstop, et=expandtabの略
-  autocmd FileType c           setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType js          setlocal sw=2 sts=2 ts=2 et
-  autocmd FileType zsh         setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType json        setlocal sw=2 sts=2 ts=2 et
-  autocmd FileType css         setlocal sw=4 sts=4 ts=4 et
-  autocmd FileType yaml        setlocal sw=2 sts=2 ts=2 et
-  autocmd FileType sh          setlocal sw=2 sts=2 ts=2 et
+  augroup vimrc
+    " Remove all vimrc autocommands
+    autocmd!
+    "ファイルタイプの検索を有効にする
+    filetype plugin on
+    "ファイルタイプに合わせたインデントを利用
+    filetype indent on
+    "sw=shiftwidth, sts=softtabstop, ts=tabstop, et=expandtabの略
+    autocmd FileType c           setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType js          setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType zsh         setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType json        setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType css         setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType yaml        setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType sh          setlocal sw=2 sts=2 ts=2 et
+  augroup END
 endif
